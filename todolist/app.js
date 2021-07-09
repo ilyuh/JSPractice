@@ -17,7 +17,7 @@ function createTodo() {
     })
 
     let deleteButton = document.createElement('button');
-    deleteButton.appendChild(document.createTextNode('x'));
+    deleteButton.appendChild(document.createTextNode('X'));
     li.appendChild(deleteButton);
     deleteButton.addEventListener('click', deleteTodoItem)
     

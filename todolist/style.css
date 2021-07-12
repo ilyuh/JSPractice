@@ -53,11 +53,13 @@ p {
 }
 
 ul {
+  overflow: hidden;
   text-align: left;
   margin-top: 20px;
 }
 
 li {
+  position: relative;
   list-style: none;
   padding: 10px 20px;
   color: #ffffff;
@@ -99,8 +101,22 @@ input {
   color: #00891E;
 }
 
+@keyframes fadeout {
+  0% {
+    left: 0%;
+    opacity: 100%;
+  }
+  100% {
+    left: 100%;
+    opacity: 0%;
+    display: none;
+  }
+}
 .delete {
-  display: none;
+  left: 0%;
+  opacity: 100%;
+  animation-name: fadeout;
+  animation-duration: 0.3s;
 }
 
 /*# sourceMappingURL=style.css.map */

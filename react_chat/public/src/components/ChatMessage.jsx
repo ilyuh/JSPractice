@@ -9,6 +9,7 @@ var ChatMessage = React.createClass({
     var minutes = message.date.getMinutes();
 
     if (minutes < 10) minutes = '0' + minutes;
+    if (hours < 10) hours = '0' + hours;
 
     return (
       <div className="chat-message">

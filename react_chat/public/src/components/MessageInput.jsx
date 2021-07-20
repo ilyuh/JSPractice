@@ -17,8 +17,7 @@ var MessageInput = React.createClass({
       this.setState({
         message: '',
       });
-      
-      window.scrollTo(0,document.body.scrollHeight);
+      setTimeout(() => {window.scrollTo(0,document.body.scrollHeight)}, 10);
     }
   },
 

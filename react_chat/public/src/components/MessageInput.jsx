@@ -25,7 +25,7 @@ var MessageInput = React.createClass({
       <input
         type="text"
         className="form-control"
-        placeholder="Enter smth"
+        placeholder="Type your message here"
         valueLink={this.linkState("message")}
         onKeyUp={this.keyHandler}
       />

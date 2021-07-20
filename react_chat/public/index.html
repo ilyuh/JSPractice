@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
-    <title></title>
+    <title>React Chat</title>
 </head>
 <body>
+    <h1>REACT CHAT</h1>
     <section id="container">
         <div>
             <label for="username-input">Username</label>
@@ -19,19 +20,19 @@
     </section>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script src="lib/socket.io/socket.io.js"></script>
     <script src="lib/react/react-with-addons.js"></script>
     <script src="lib/react/JSXTransformer.js"></script>
     <script src="lib/jquery/dist/jquery.js"></script>
     <script src="lib/peerjs/peer.js"></script>
     <script src="lib/eventEmitter/EventEmitter.js"></script>
     <script type="text/jsx" src="src/Action.js"></script>
-    <script type="text/jsx" src="emitters/ChatEmitter.js"></script>
+    <script type="text/jsx" src="emitters/ChatEmmiter.js"></script>
     <script type="text/jsx" src="src/components/ChatBox.jsx"></script>
+    <script type="text/jsx" src="src/components/UsersList.jsx"></script>
     <script type="text/jsx" src="src/components/ChatMessage.jsx"></script>
     <script type="text/jsx" src="src/components/MessageInput.jsx"></script>
     <script type="text/jsx" src="src/components/MessageList.jsx"></script>
-    <script type="text/jsx" src="src/components/UsersList.jsx"></script>
+
     <script type="text/jsx" src="src/app.jsx"></script>
 </body>
 </html>

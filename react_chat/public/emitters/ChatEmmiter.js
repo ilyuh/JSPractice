@@ -27,14 +27,34 @@ ChatEmmiter.prototype.getUsername = function() {
   return this._username;
 }
 
-ChatEmmiter.prototype.send = function(user, message) {
-  this._peers[user].send(message);
+ChatEmmiter.prototype._connectTo = function(username) {
+  var connection = this.peer.connect(username);
+  connection.on('open', function() {
+    this._registerPeer(username, connection)
+  }.bind(this))
+}
+
+ChatEmmiter.prototype._disconnectFrom = function(username) {
+  delete this._peers[username];
+}
+
+ChatEmmiter.prototype._registerPeer = function(username, connection) {
+  console.log("Registration in progress...");
+  this._peers[username] = connection;
+  connection.on('data', function(message) {
+    console.log('Message received:', message);
+    this.emit(Actions.USER_MESSAGE, { content: message, author: username });
+  }.bind(this));
 }
 
 ChatEmmiter.prototype.broadcast = function(message) {
   for (var peer in this._peers) {
     this.send(peer, message)
   }
+}
+
+ChatEmmiter.prototype.send = function(user, message) {
+  this._peers[user].send(message);
 }
 
 ChatEmmiter.prototype.connect = function(username) {
@@ -49,6 +69,7 @@ ChatEmmiter.prototype.connect = function(username) {
       self.emit(Actions.USER_CONNECTED, userId);
       console.log("User connected", userId);
     });
+
     self.socket.on(Actions.USER_DISCONNECTED, function(userId) {
       if (userId === self.getUsername()) return;
       self._disconnectFrom(userId);
@@ -56,38 +77,22 @@ ChatEmmiter.prototype.connect = function(username) {
       console.log("User disconnected", userId);
     });
   });
+
   console.log('Connection with username', username);
+
   this.peer = new Peer(username, {
     host: location.hostname,
     port: 9000,
     path: 'chat',
   });
+
   this.peer.on('open', function(userId) {
     self.setUsername(userId)
   });
+
   this.peer.on('connection', function(connection) {
-    console.log(connection);
     self._registerPeer(connection.peer, connection);
+    console.log(connection);
     self.emit(Actions.USER_CONNECTED, {})
   });
-};
-
-ChatEmmiter.prototype._connectTo = function(username) {
-  var connection = this.peer.connect(username);
-  connection.on('open', function() {
-    this._registerPeer(username, connection);
-  }.bind(this));
 }
-
-ChatEmmiter.prototype._registerPeer = function(username, connect) {
-  console.log('Registration is in progress.');
-  this._peers[username] = connection;
-  connection.on('data', function(message) {
-    console.log('Message recieved', message);
-    this.emit(Actions.USER_MESSAGE, {content: message, author: username});
-  }.bind(this));
-};
-
-ChatEmmiter.prototype._disconnectFrom = function(username) {
-  delete this._peers[username];
-};

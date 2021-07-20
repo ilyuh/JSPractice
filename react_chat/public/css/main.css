@@ -69,3 +69,7 @@ label {
 .chat-user {
   font-weight: 900;
 }
+
+.chat-box {
+  padding-bottom: 10px;
+}

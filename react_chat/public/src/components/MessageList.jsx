@@ -31,7 +31,7 @@ var MessagesList = React.createClass({
     if (messages.length === 0) {
       messages = [
         <div className="chat-messages-empty">
-          No messages yet. You can be first.
+          No messages yet. You may be the first.
         </div>
       ]
     }
